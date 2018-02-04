@@ -4,7 +4,13 @@ var nums = [];
 
 var i = 9;
 
+var k;
+
+var l;
+
 var row;
+
+var sorted = false;
 
 var html = `<colgroup>
 		<col width="5%"><col width="5%">
@@ -59,8 +65,7 @@ function randomNumber(max) { //we have to do it this way because if we just popu
 
 }
 
-
-$('#step').click(function(){
+function sort(){
 
 	console.log(nums);
 
@@ -94,14 +99,57 @@ $('#step').click(function(){
 
 	} 
 
-	i --;
+	i--;
 
-});
+	if (nums[0] > nums[1] 
+		&& nums[1] > nums[2] 
+		&& nums[2] > nums[3] 
+		&& nums[3] > nums[4] 
+		&& nums[4] > nums[5] 
+		&& nums[5] > nums[6] 
+		&& nums[6] > nums[7] 
+		&& nums[7] > nums[8] 
+		&& nums[8] > nums[9]) {
+
+		$('#step').prop('disabled', 'true');
+
+		$('table').find('td').css('background', '#684791'); 
+
+		alert('Sorting Complete!');
+
+
+	}	
+
+	// for (l = 0; l < nums.length; l++) {
+
+	// 	if (nums[l] < nums[l + 1]) { 
+
+	// 		sorted = true; 
+
+		// } else {
+
+		// 	sorted = false;
+
+		// }
+
+	// }
+
+	// if (l == nums.length && sorted == true && Math.max.apply(Math, nums) == nums[0] && Math.min.apply(Math, nums) == nums[nums.length - 1]) { 
+
+	// 	$('#step').prop('disabled', 'true'); 
+
+	// 	alert('Sorting Complete!'); 
+	// };
+}
 
 	
 $('#shuffle').click(function() {
 
+	// $('#step').removeAttr('disabled');
+
 	nums = [];
+
+	k = 0;
 
 	$('table').html(html)
 
@@ -122,6 +170,7 @@ $('#shuffle').click(function() {
 });
 
 
+$('#step').click(sort);
 
 
 
