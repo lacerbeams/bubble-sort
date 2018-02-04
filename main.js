@@ -10,8 +10,6 @@ var l;
 
 var row;
 
-var sorted = false;
-
 var html = `<colgroup>
 		<col width="5%"><col width="5%">
         <col width="5%"><col width="5%">
@@ -26,42 +24,9 @@ var html = `<colgroup>
 		</colgroup>`
 
 
-function randomNumber(max) { //we have to do it this way because if we just populate the array with Math.random it can give us duplicate numbers and the sorting will get messed up
+function randomNumber(max) { 
 
-	var random =  Math.floor(Math.random() * Math.floor(max)); 
-
-	var randomArray = [];
-
-	number = 0;
-
-	while (randomArray.length < max) {
-
-		randomArray.push(number); 
-
-		number++;
-
-	} 
-
-	var currentIndex = randomArray.length; 
-
-	var randomIndex;
-	
-	var tempNum; 
-
-	  while (currentIndex != 0) {
-
-	    randomIndex = Math.floor(Math.random() * currentIndex);
-
-	    currentIndex -= 1;
-
-	    tempNum = randomArray[currentIndex];
-
-	    randomArray[currentIndex] = randomArray[randomIndex];
-	    
-	    randomArray[randomIndex] = tempNum;
-	  }
-
-  return randomArray[random];
+	return Math.floor(Math.random() * Math.floor(max)); 
 
 }
 
@@ -124,42 +89,28 @@ function sort(){
 
 		$('#step').prop('disabled', 'true');
 
+		$('#step').css('background-color', 'grey');
+
 		$('table').find('td').css('background', '#684791'); 
 
-		alert('Sorting Complete!');
+		console.log('Sorting Complete!');
 
 	}	
 
-	// for (l = 0; l < nums.length; l++) {
-
-	// 	if (nums[l] < nums[l + 1]) { 
-
-	// 		sorted = true; 
-
-		// } else {
-
-		// 	sorted = false;
-
-		// }
-
-	// }
-
-	// if (l == nums.length && sorted == true && Math.max.apply(Math, nums) == nums[0] && Math.min.apply(Math, nums) == nums[nums.length - 1]) { 
-
-	// 	$('#step').prop('disabled', 'true'); 
-
-	// 	alert('Sorting Complete!'); 
-	// };
 }
 
 	
 $('#shuffle').click(function() {
 
-	// $('#step').removeAttr('disabled');
+	$('#step').removeAttr('disabled');
+
+	$('#step').css('background-color', '#684791');
 
 	nums = [];
 
 	k = 0;
+
+	i = 9;
 
 	$('table').html(html)
 
@@ -167,7 +118,12 @@ $('#shuffle').click(function() {
 
 		var rand = randomNumber(100);
 
-		nums.push(rand);
+		if (!nums.includes(rand)) {
+
+			nums.push(rand);
+			
+		}
+
 
 	}
 
