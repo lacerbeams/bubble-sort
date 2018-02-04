@@ -71,9 +71,11 @@ function sort(){
 
 	$('table').find('td').css('background', '#684791');
 
-	if (i == 0) {
+	if (i - k == 0) {
 
 		i = 9;
+
+		k++;
 
 	} 
 
