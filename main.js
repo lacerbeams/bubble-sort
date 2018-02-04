@@ -33,31 +33,16 @@ function makeBar(max) {
 
 	rand = randomNumber(max);
 
-	$('table').append('<tr id= "' + rand + '"><td colspan=' + rand / 5 + ' style="height: 20px; background-color: #684791; margin: 10px;"></td></tr>');
+	$('table').append('<tr id= "' + rand + '"><td colspan=' + rand + ' style="height: 20px; background: #684791; margin: 10px;">' + rand + '</td></tr>');
 
 	console.log(rand);
 
-	nums.unshift(rand);
+	nums.push(rand);
 
 }
 
 
-$('#shuffle').click(function() {
-
-	$('table').html(html)
-
-	for (var j = 0; j < 10; j++) {
-
-		makeBar(100);
-
-	}
-
-});
-
-
 $('#step').click(function(){
-
-	// $('#bars').children().css('background-color', '684791');
 
 	$('table').html(html)
 
@@ -79,11 +64,9 @@ $('#step').click(function(){
 
 		rowTwo = $('#'+nums[i - 1]);
 
-		rowOne.find('td').css("background-color", "#cfa3ff");
+		rowOne.css("background", "#cfa3ff");
 
-		rowTwo.find('td').css("background-color", "#a984ce");
-
-		console.log(rowOne, rowTwo);
+		rowTwo.css("background", "#a984ce");
 
 		rowTwo.insertBefore(rowTwo.prev());
 
@@ -93,11 +76,27 @@ $('#step').click(function(){
 
 	for (var k = 0; k < nums.length; k++) {
 
-		$('table').append('<tr id= "' + nums[k] + '"><td colspan=' + nums[k] / 5 + ' style="height: 20px; background-color: #684791; margin: 10px;"></td></tr>');
+		$('table').append('<tr id= "' + nums[k] + '"><td colspan=' + nums[k] + ' style="height: 20px; background-color: #684791; margin: 10px;">' + nums[k] + '</td></tr>');
 
 	}
 
 });
+
+	
+$('#shuffle').click(function() {
+
+	nums = [];
+
+	$('table').html(html)
+
+	for (var j = 0; j < 10; j++) {
+
+		makeBar(100);
+
+	}
+
+});
+
 
 
 
