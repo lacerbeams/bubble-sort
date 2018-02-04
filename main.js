@@ -99,7 +99,16 @@ function sort(){
 
 		rowTwo.insertBefore(rowTwo.prev());
 
-	} 
+	} else {
+
+		rowOne = $('#'+nums[i]);
+
+		rowTwo = $('#'+nums[i - 1]);
+
+		rowOne.html('<td colspan=' + nums[i] + ' style="height: 20px; background: #b9a0db; margin: 10px;">' + nums[i] + '</td></tr>');
+
+		rowTwo.html('<td colspan=' + nums[i - 1] + ' style="height: 20px; background: #8d6eb5; margin: 10px;">' + nums[i - 1] + '</td></tr>');
+	}
 
 	i--;
 
@@ -118,7 +127,6 @@ function sort(){
 		$('table').find('td').css('background', '#684791'); 
 
 		alert('Sorting Complete!');
-
 
 	}	
 
