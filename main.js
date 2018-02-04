@@ -122,8 +122,11 @@ $('#shuffle').click(function() {
 
 			nums.push(rand);
 			
-		}
+		} else {
 
+			j--;
+
+		}
 
 	}
 
