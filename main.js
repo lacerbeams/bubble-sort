@@ -8,6 +8,19 @@ var rand;
 
 var row;
 
+var html = `<colgroup>
+		<col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+		</colgroup>`
+
 
 function randomNumber(max) {
 
@@ -31,18 +44,7 @@ function makeBar(max) {
 
 $('#shuffle').click(function() {
 
-	$('table').html(`<colgroup>
-		<col width="5%"><col width="5%">
-        <col width="5%"><col width="5%">
-        <col width="5%"><col width="5%">
-        <col width="5%"><col width="5%">
-        <col width="5%"><col width="5%">
-        <col width="5%"><col width="5%">
-        <col width="5%"><col width="5%">
-        <col width="5%"><col width="5%">
-        <col width="5%"><col width="5%">
-        <col width="5%"><col width="5%">
-		</colgroup>`)
+	$('table').html(html)
 
 	for (var j = 0; j < 10; j++) {
 
@@ -55,7 +57,9 @@ $('#shuffle').click(function() {
 
 $('#step').click(function(){
 
-	$('#bars').children().css('background-color', '684791');
+	// $('#bars').children().css('background-color', '684791');
+
+	$('table').html(html)
 
 	if (i == 0) {
 
@@ -75,9 +79,9 @@ $('#step').click(function(){
 
 		rowTwo = $('#'+nums[i - 1]);
 
-		rowOne.first().css("background-color", "#cfa3ff");
+		rowOne.find('td').css("background-color", "#cfa3ff");
 
-		rowTwo.first().css("background-color", "#a984ce");
+		rowTwo.find('td').css("background-color", "#a984ce");
 
 		console.log(rowOne, rowTwo);
 
@@ -87,7 +91,11 @@ $('#step').click(function(){
 
 	i --;
 
-	return nums;
+	for (var k = 0; k < nums.length; k++) {
+
+		$('table').append('<tr id= "' + nums[k] + '"><td colspan=' + nums[k] / 5 + ' style="height: 20px; background-color: #684791; margin: 10px;"></td></tr>');
+
+	}
 
 });
 
