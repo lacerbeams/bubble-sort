@@ -8,6 +8,8 @@ var rand;
 
 var row;
 
+var shifted = true;
+
 var html = `<colgroup>
 		<col width="5%"><col width="5%">
         <col width="5%"><col width="5%">
@@ -35,8 +37,6 @@ function makeBar(max) {
 
 	$('table').append('<tr id= "' + rand + '"><td colspan=' + rand + ' style="height: 20px; background: #684791; margin: 10px;">' + rand + '</td></tr>');
 
-	console.log(rand);
-
 	nums.push(rand);
 
 }
@@ -44,41 +44,47 @@ function makeBar(max) {
 
 $('#step').click(function(){
 
-	$('table').html(html)
+	console.log(nums);
+
+	$('table').find('td').css('background', '#684791');
 
 	if (i == 0) {
 
-		i = 10;
+		i = 9;
 
 	} 
 
-	if (nums[i] > nums[i - 1]) {
+	rowOne = $('#'+nums[i]);
 
-		var temp = nums[i];
+	rowTwo = $('#'+nums[i - 1]);
 
-		nums[i] = nums[i - 1];
+	console.log(nums[i], nums[i-1]);
 
-		nums[i - 1] = temp;
+	rowOne.html('<td colspan=' + nums[i] + ' style="height: 20px; background: #b9a0db; margin: 10px;">' + nums[i] + '</td></tr>');
 
-		rowOne = $('#'+nums[i]);
+	rowTwo.html('<td colspan=' + nums[i - 1] + ' style="height: 20px; background: #8d6eb5; margin: 10px;">' + nums[i - 1] + '</td></tr>');
 
-		rowTwo = $('#'+nums[i - 1]);
+	do {
 
-		rowOne.css("background", "#cfa3ff");
+		shifted = false;
 
-		rowTwo.css("background", "#a984ce");
+		if (nums[i] > nums[i - 1]) {
 
-		rowTwo.insertBefore(rowTwo.prev());
+			var temp = nums[i];
 
-	} 
+			nums[i] = nums[i - 1];
+
+			nums[i - 1] = temp;
+
+			rowTwo.insertBefore(rowTwo.prev());
+
+			shifted = true;
+
+		} 
+
+	} while (shifted == true)
 
 	i --;
-
-	for (var k = 0; k < nums.length; k++) {
-
-		$('table').append('<tr id= "' + nums[k] + '"><td colspan=' + nums[k] + ' style="height: 20px; background-color: #684791; margin: 10px;">' + nums[k] + '</td></tr>');
-
-	}
 
 });
 
