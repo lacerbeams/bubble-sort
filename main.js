@@ -4,11 +4,7 @@ var nums = [];
 
 var i = 9;
 
-var rand;
-
 var row;
-
-var shifted = true;
 
 var html = `<colgroup>
 		<col width="5%"><col width="5%">
@@ -24,20 +20,42 @@ var html = `<colgroup>
 		</colgroup>`
 
 
-function randomNumber(max) {
+function randomNumber(max) { //we have to do it this way because if we just populate the array with Math.random it can give us duplicate numbers and the sorting will get messed up
 
-	return Math.floor(Math.random() * Math.floor(max));
+	var random =  Math.floor(Math.random() * Math.floor(max)); 
 
-}
+	var randomArray = [];
 
+	number = 0;
 
-function makeBar(max) {
+	while (randomArray.length < max) {
 
-	rand = randomNumber(max);
+		randomArray.push(number); 
 
-	$('table').append('<tr id= "' + rand + '"><td colspan=' + rand + ' style="height: 20px; background: #684791; margin: 10px;">' + rand + '</td></tr>');
+		number++;
 
-	nums.push(rand);
+	} 
+
+	var currentIndex = randomArray.length; 
+
+	var randomIndex;
+	
+	var tempNum; 
+
+	  while (currentIndex != 0) {
+
+	    randomIndex = Math.floor(Math.random() * currentIndex);
+
+	    currentIndex -= 1;
+
+	    tempNum = randomArray[currentIndex];
+
+	    randomArray[currentIndex] = randomArray[randomIndex];
+	    
+	    randomArray[randomIndex] = tempNum;
+	  }
+
+  return randomArray[random];
 
 }
 
@@ -54,35 +72,27 @@ $('#step').click(function(){
 
 	} 
 
-	rowOne = $('#'+nums[i]);
+	if (nums[i] > nums[i - 1]) {
 
-	rowTwo = $('#'+nums[i - 1]);
+		var temp = nums[i];
 
-	console.log(nums[i], nums[i-1]);
+		nums[i] = nums[i - 1];
 
-	rowOne.html('<td colspan=' + nums[i] + ' style="height: 20px; background: #b9a0db; margin: 10px;">' + nums[i] + '</td></tr>');
+		nums[i - 1] = temp;
 
-	rowTwo.html('<td colspan=' + nums[i - 1] + ' style="height: 20px; background: #8d6eb5; margin: 10px;">' + nums[i - 1] + '</td></tr>');
+		rowOne = $('#'+nums[i]);
 
-	do {
+		rowTwo = $('#'+nums[i - 1]);
 
-		shifted = false;
+		console.log(nums[i], nums[i-1]);
 
-		if (nums[i] > nums[i - 1]) {
+		rowOne.html('<td colspan=' + nums[i] + ' style="height: 20px; background: #b9a0db; margin: 10px;">' + nums[i] + '</td></tr>');
 
-			var temp = nums[i];
+		rowTwo.html('<td colspan=' + nums[i - 1] + ' style="height: 20px; background: #8d6eb5; margin: 10px;">' + nums[i - 1] + '</td></tr>');
 
-			nums[i] = nums[i - 1];
+		rowTwo.insertBefore(rowTwo.prev());
 
-			nums[i - 1] = temp;
-
-			rowTwo.insertBefore(rowTwo.prev());
-
-			shifted = true;
-
-		} 
-
-	} while (shifted == true)
+	} 
 
 	i --;
 
@@ -97,9 +107,17 @@ $('#shuffle').click(function() {
 
 	for (var j = 0; j < 10; j++) {
 
-		makeBar(100);
+		var rand = randomNumber(100);
+
+		nums.push(rand);
 
 	}
+
+	nums.forEach(function(num) {
+
+		$('table').append('<tr id= "' + num + '"><td colspan=' + num + ' style="height: 20px; background: #684791; margin: 10px;">' + num + '</td></tr>');
+		
+	});
 
 });
 
